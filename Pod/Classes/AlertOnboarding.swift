@@ -52,8 +52,10 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     @objc open var nextInsteadOfSkip = false
     
     @objc open var titleNextButton = "NEXT"
-    @objc open var titleSkipButton = "SKOOP"
-    @objc open var titleGotItButton = "GOT IT !"
+    @objc open var titleSkipButton = "SKIP"
+    @objc open var titleGotItButton = "GOT IT!"
+    
+    @objc open var backgroundImage: UIImage?
     
     @objc open var delegate: AlertOnboardingDelegate?
     
@@ -85,7 +87,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         
         //Update Color
         self.buttonBottom.backgroundColor = colorButtonBottomBackground
-        self.backgroundColor = colorForAlertViewBackground
+//        self.backgroundColor = colorForAlertViewBackground
         self.buttonBottom.setTitleColor(colorButtonText, for: UIControlState())
         self.buttonBottom.setTitle(self.titleSkipButton, for: UIControlState())
         
@@ -142,7 +144,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
         
         self.background = UIView(frame: CGRect(x: 0,y: 0, width: 0, height: 0))
         self.background.backgroundColor = UIColor.black
-        self.background.alpha = 0.5
+        self.background.alpha = 0.8
         
         self.clipsToBounds = true
         self.layer.cornerRadius = 10

@@ -54,6 +54,15 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         self.view.addSubview(self.pageController.view)
         self.view.addSubview(self.pageControl)
         self.pageController.didMove(toParentViewController: self)
+        
+        var imageView : UIImageView!
+        imageView = UIImageView(frame: self.view.bounds)
+        imageView.contentMode =  UIViewContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = alertview.backgroundImage!
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubview(toBack: imageView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -214,5 +223,44 @@ class AlertPageViewController: UIViewController, UIPageViewControllerDataSource,
         let alertViewSizeHeight = UIScreen.main.bounds.height*alertview.percentageRatioHeight
         let positionX = alertViewSizeHeight - (alertViewSizeHeight * 0.1) - 50
         self.pageControl.frame = CGRect(x: 0, y: positionX, width: self.view.bounds.width, height: 50)
+    }
+}
+
+
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format:"#%06x", rgb)
     }
 }
