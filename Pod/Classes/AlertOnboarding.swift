@@ -52,7 +52,7 @@ open class AlertOnboarding: UIView, AlertPageViewDelegate {
     @objc open var nextInsteadOfSkip = false
     
     @objc open var titleNextButton = "NEXT"
-    @objc open var titleSkipButton = "SKIP"
+    @objc open var titleSkipButton = "SKOOP"
     @objc open var titleGotItButton = "GOT IT !"
     
     @objc open var delegate: AlertOnboardingDelegate?
